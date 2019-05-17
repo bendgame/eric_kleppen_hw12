@@ -4,16 +4,13 @@ from bs4 import BeautifulSoup
 import time
 import pandas as pd
 
+#dictionary for mongo
+mars_info = {}
 
 def init_browser():
     
     executable_path = {'executable_path': 'C:/chromedrv/chromedriver.exe'}
     browser = Browser('chrome', **executable_path, headless=False)
-
-
-
-#dictionary for mongo
-mars_info = {}
 
 #news scrape
 def scrape_mars_news():
