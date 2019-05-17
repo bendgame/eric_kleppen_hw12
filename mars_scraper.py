@@ -12,10 +12,10 @@ def init_browser():
 
 
 
-# Create Mission to Mars global dictionary that can be imported into Mongo
+#dictionary for mongo
 mars_info = {}
 
-# NASA MARS NEWS
+#news scrape
 def scrape_mars_news():
     # Initialize browser 
     browser = init_browser()
@@ -29,13 +29,13 @@ def scrape_mars_news():
     n_description = news_soup.find('div', class_='rollover_description').text
 
     mars_info['news_title'] = n_title
-    mars_info['news_paragraph'] = n_description
+    mars_info['news_description'] = n_description
 
     return mars_info
     
     browser.quit()
 
-# FEATURED IMAGE
+#image scrape
 def scrape_mars_image():
     base_image_url = 'https://www.jpl.nasa.gov'
     space_image_url = 'https://www.jpl.nasa.gov/spaceimages/?search=&category=Mars'
@@ -59,7 +59,7 @@ def scrape_mars_image():
 
         
 
-# Mars Weather 
+#weather scrape
 def scrape_mars_weather():
 
     weather_url = 'https://twitter.com/marswxreport?lang=en'
@@ -78,14 +78,14 @@ def scrape_mars_weather():
         wt = weather_twt[0].text.strip()
     #wt
 
-    mars_info['weather_tweet'] = wt
+    mars_info['weather_twt'] = wt
 
     return mars_info
 
     browser.quit()
 
 
-# Mars Facts
+#facts scrape
 def scrape_mars_facts():
 
     facts_url = 'http://space-facts.com/mars/'
@@ -104,9 +104,7 @@ def scrape_mars_facts():
     return mars_info
 
 
-# MARS HEMISPHERES
-
-
+#hemi scrape
 def scrape_mars_hemispheres():
 
     hemi_url = 'https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars'
@@ -134,7 +132,6 @@ def scrape_mars_hemispheres():
         html = browser.html
         ur = BeautifulSoup(html,'html.parser')
         img = ur.find('img',class_='wide-image')
-        #cerb_img['img']
         img_list.append(base_url+img['src'])
         j+=1
         hemi_title = ur.find('h2').text
@@ -142,10 +139,7 @@ def scrape_mars_hemispheres():
         title_list.append(hemi_title)
         hemi_dict.append({"title" : hemi_title, "img_url" : base_url+img['src']})
     
-    mars_info['hiu'] = hemi_dict 
-
-
-# Return mars_data dictionary 
+    mars_info['hemis'] = hemi_dict 
 
     return mars_info
 
