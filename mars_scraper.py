@@ -4,18 +4,22 @@ from bs4 import BeautifulSoup
 import time
 import pandas as pd
 
-#dictionary for mongo
-mars_info = {}
 
-def init_browser():
+# def init_browser():
     
-    executable_path = {'executable_path': 'C:/chromedrv/chromedriver.exe'}
-    browser = Browser('chrome', **executable_path, headless=False)
+#     executable_path = {'executable_path': 'C:/chromedrv/chromedriver.exe'}
+#     browser = Browser('chrome', **executable_path, headless=True)
 
-#news scrape
+
+
+# Create Mission to Mars global dictionary that can be imported into Mongo
+mars_data = {}
+
+
 def scrape_mars_news():
-    # Initialize browser 
-    browser = init_browser()
+    executable_path = {'executable_path': 'C:/chromedrv/chromedriver.exe'}
+    browser = Browser('chrome', **executable_path, headless=True)
+   
     news_url = 'https://mars.nasa.gov/news/?page=0&per_page=40&order=publish_date+desc%2Ccreated_at+desc&search=&category=19%2C165%2C184%2C204&blank_scope=Latest'
     browser.visit(news_url)
 
@@ -25,15 +29,17 @@ def scrape_mars_news():
     n_title = news_soup.find('div', class_='content_title').find('a').text.strip()
     n_description = news_soup.find('div', class_='rollover_description').text
 
-    mars_info['news_title'] = n_title
-    mars_info['news_description'] = n_description
+    mars_data['news_title'] = n_title
+    mars_data['news_description'] = n_description
 
-    return mars_info
+    return mars_data
     
     browser.quit()
 
-#image scrape
+
 def scrape_mars_image():
+    executable_path = {'executable_path': 'C:/chromedrv/chromedriver.exe'}
+    browser = Browser('chrome', **executable_path, headless=True)
     base_image_url = 'https://www.jpl.nasa.gov'
     space_image_url = 'https://www.jpl.nasa.gov/spaceimages/?search=&category=Mars'
     browser.visit(space_image_url)
@@ -48,17 +54,18 @@ def scrape_mars_image():
     [links.append(item['href']) for item in image_soup.find_all('a', attrs={'href' : True})]
     featured_image_url  = base_image_url + links[56]
 
-    mars_info['featured_image_url'] = featured_image_url 
+    mars_data['featured_image_url'] = featured_image_url 
 
-    return mars_info
+    return mars_data
 
     browser.quit()
 
         
 
-#weather scrape
-def scrape_mars_weather():
 
+def scrape_mars_weather():
+    executable_path = {'executable_path': 'C:/chromedrv/chromedriver.exe'}
+    browser = Browser('chrome', **executable_path, headless=True)
     weather_url = 'https://twitter.com/marswxreport?lang=en'
     browser.visit(weather_url)
 
@@ -75,14 +82,14 @@ def scrape_mars_weather():
         wt = weather_twt[0].text.strip()
     #wt
 
-    mars_info['weather_twt'] = wt
+    mars_data['weather_tweet'] = wt
 
-    return mars_info
+    return mars_data
 
     browser.quit()
 
 
-#facts scrape
+
 def scrape_mars_facts():
 
     facts_url = 'http://space-facts.com/mars/'
@@ -96,14 +103,17 @@ def scrape_mars_facts():
     mars_facts.set_index('Description', inplace=True)
 
     table_html =  mars_facts.to_html()
-    mars_info['mars_facts'] = table_html
+    mars_data['mars_facts'] = table_html
     
-    return mars_info
+    return mars_data
 
 
-#hemi scrape
+
+
+
 def scrape_mars_hemispheres():
-
+    executable_path = {'executable_path': 'C:/chromedrv/chromedriver.exe'}
+    browser = Browser('chrome', **executable_path, headless=True)
     hemi_url = 'https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars'
     base_url = 'https://astrogeology.usgs.gov'
     browser.visit(hemi_url)
@@ -129,6 +139,7 @@ def scrape_mars_hemispheres():
         html = browser.html
         ur = BeautifulSoup(html,'html.parser')
         img = ur.find('img',class_='wide-image')
+
         img_list.append(base_url+img['src'])
         j+=1
         hemi_title = ur.find('h2').text
@@ -136,9 +147,11 @@ def scrape_mars_hemispheres():
         title_list.append(hemi_title)
         hemi_dict.append({"title" : hemi_title, "img_url" : base_url+img['src']})
     
-    mars_info['hemis'] = hemi_dict 
+    mars_data['hemis'] = hemi_dict 
 
-    return mars_info
+
+
+    return mars_data
 
 
     browser.quit()
