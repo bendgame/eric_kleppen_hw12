@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>mars data</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+
+<body>
+  <div class="container-fluid">
+    <div class="jumbotron text-center">
+      <h1>Mission to Mars</h1>
+      
+      <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape Mars Data</a></p>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 col-md-6">
+      <h3>{{mars_db.news_title}}</h3>
+      <p>{{mars_db.news_description}}</p>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+  <div class="col-sm-12 col-md-6">
+  <h3>Featured Mars Image</h3>
+  <img src = "{{mars_db.featured_image_url}}">
+  </div>
+  </div>
+</div>
+
+
+<div class="container">
+<div class="row">
+<div class="col-sm-12 col-md-6">
+<h3>Mars Weather from Mars Weather Twitter</h3>
+<p>{{mars_db.weather_tweet}}</p>
+</div>
+</div>
+</div>
+
+  <div class="container">
+<div class="row">
+    <div class="col-sm-12 col-md-6">
+  <h3>Mars Facts from Space-facts.com</h3>
+  
+  {{mars_db.mars_facts|safe}}
+</div>
+</div>
+</div>
+
+<hr>
+  <div class="container">
+  <div class="row">
+      {% for img in mars_db.hemis %}
+    <div class="col-sm-12 col-md-6">
+        
+          <img src="{{ img.img_url }}" alt="..." style="width:100%">
+          <h4>{{img.title }}</h4>
+        
+    </div>
+    {% endfor %}
+  </div>
+  </div>
+
+ 
+</body>
+
+</html>
