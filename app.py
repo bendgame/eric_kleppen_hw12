@@ -26,19 +26,19 @@ def home():
 def scrape():
 
    #scrape the data
-    mars_data = mars_scraper.scrape_mars_news()
+    mars_data = mars_scraper.mars_news()
     mongo.db.mars_db.update({}, mars_data, upsert=True)
 
-    mars_data = mars_scraper.scrape_mars_image()
+    mars_data = mars_scraper.feature_mars_img()
     mongo.db.mars_db.update({}, mars_data, upsert=True)
 
-    mars_data = mars_scraper.scrape_mars_weather()
+    mars_data = mars_scraper.mars_weather()
     mongo.db.mars_db.update({}, mars_data, upsert=True)
 
-    mars_data = mars_scraper.scrape_mars_facts()
+    mars_data = mars_scraper.mars_facts()
     mongo.db.mars_db.update({}, mars_data, upsert=True)
 
-    mars_data = mars_scraper.scrape_mars_hemispheres()
+    mars_data = mars_scraper.mars_hemis()
     mongo.db.mars_db.update({}, mars_data, upsert=True)
     
 

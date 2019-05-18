@@ -16,7 +16,7 @@ import pandas as pd
 mars_data = {}
 
 
-def scrape_mars_news():
+def mars_news():
     executable_path = {'executable_path': 'C:/chromedrv/chromedriver.exe'}
     browser = Browser('chrome', **executable_path, headless=True)
    
@@ -37,7 +37,7 @@ def scrape_mars_news():
     browser.quit()
 
 
-def scrape_mars_image():
+def feature_mars_img():
     executable_path = {'executable_path': 'C:/chromedrv/chromedriver.exe'}
     browser = Browser('chrome', **executable_path, headless=True)
     base_image_url = 'https://www.jpl.nasa.gov'
@@ -63,7 +63,7 @@ def scrape_mars_image():
         
 
 
-def scrape_mars_weather():
+def mars_weather():
     executable_path = {'executable_path': 'C:/chromedrv/chromedriver.exe'}
     browser = Browser('chrome', **executable_path, headless=True)
     weather_url = 'https://twitter.com/marswxreport?lang=en'
@@ -90,7 +90,7 @@ def scrape_mars_weather():
 
 
 
-def scrape_mars_facts():
+def mars_facts():
 
     facts_url = 'http://space-facts.com/mars/'
 
@@ -111,7 +111,7 @@ def scrape_mars_facts():
 
 
 
-def scrape_mars_hemispheres():
+def mars_hemis():
     executable_path = {'executable_path': 'C:/chromedrv/chromedriver.exe'}
     browser = Browser('chrome', **executable_path, headless=True)
     hemi_url = 'https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars'
