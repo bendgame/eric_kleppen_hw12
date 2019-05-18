@@ -5,12 +5,6 @@ import time
 import pandas as pd
 
 
-# def init_browser():
-    
-#     executable_path = {'executable_path': 'C:/chromedrv/chromedriver.exe'}
-#     browser = Browser('chrome', **executable_path, headless=True)
-
-
 
 # Create Mission to Mars global dictionary that can be imported into Mongo
 mars_data = {}
