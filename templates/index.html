@@ -21,27 +21,31 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-12 col-md-6">
-      <h3>{{mars_db.news_title}}</h3>
-      <p>{{mars_db.news_description}}</p>
+      <h2>Latest Mars News</h2>
+      <h3>{{mars_db_insert.news_title}}</h3>
+      <p>{{mars_db_insert.news_description}}</p>
     </div>
   </div>
 </div>
 
 <div class="container">
   <div class="row">
-  <div class="col-sm-12 col-md-6">
+  <div class="col-sm-12 col-md-8">
   <h3>Featured Mars Image</h3>
-  <img src = "{{mars_db.featured_image_url}}">
+  <img src = "{{mars_db_insert.featured_image_url}}" style="width:100%">
   </div>
-  </div>
-</div>
 
 
-<div class="container">
-<div class="row">
-<div class="col-sm-12 col-md-6">
+
+
+<div class="col-sm-12 col-md-4">
 <h3>Mars Weather from Mars Weather Twitter</h3>
-<p>{{mars_db.weather_tweet}}</p>
+<p>{{mars_db_insert.weather_tweet}}</p>
+
+<h3>Mars Facts from Space-facts.com</h3>
+  
+{{mars_db_insert.mars_facts|safe}}
+
 </div>
 </div>
 </div>
@@ -49,9 +53,7 @@
   <div class="container">
 <div class="row">
     <div class="col-sm-12 col-md-6">
-  <h3>Mars Facts from Space-facts.com</h3>
-  
-  {{mars_db.mars_facts|safe}}
+
 </div>
 </div>
 </div>
@@ -59,11 +61,11 @@
 <hr>
   <div class="container">
   <div class="row">
-      {% for img in mars_db.hemis %}
+      {% for img in mars_db_insert.hemis %}
     <div class="col-sm-12 col-md-6">
         
           <img src="{{ img.img_url }}" alt="..." style="width:100%">
-          <h4>{{img.title }}</h4>
+          <h2>{{img.title }}</h2>
         
     </div>
     {% endfor %}
